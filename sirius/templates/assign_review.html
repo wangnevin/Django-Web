@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>作业批改</title>
+</head>
+<body>
+<h1>作业批改</h1>
+<div class="assign-info">
+    <ul>
+        <li>作业标题：{{ assign.title }}</li>
+        <li>提交者：{{ assign.user }}</li>
+        <li>科目：{{ assign.type }}</li>
+    </ul>
+</div>
+<div class="content-download">
+    <span>下载：<a href="{% url 'assign_download' assign.id %}">{{ assign.content.name }}</a></span>
+</div>
+<div class=assign-"review">
+    <form method="post">
+        {% csrf_token %}
+        <ul>
+            <li>
+                <span>得分：</span>
+                <input type="number" name="score">
+            </li>
+            <li>
+                <span>获得学分：</span>
+                <input type="number" name="credit">
+            </li>
+        </ul>
+        <input name="Submit" type="submit" value="提交">
+    </form>
+</div>
+</body>
+</html>

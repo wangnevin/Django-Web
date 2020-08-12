@@ -1,0 +1,42 @@
+.info{
+    padding: 10px;
+    background: cornflowerblue;
+}
+
+.info ul li{
+    list-style: None;
+    margin: 3px;
+}
+
+.student-info{
+    padding: 5px;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: aliceblue;
+}
+
+table tr td{
+    border: solid 1px aliceblue;
+    padding: 5px 20px;
+    border-radius: 3px;
+}
+
+label{
+    font-family: '微软雅黑';
+}
+
+.submit{
+    border-radius: 5px;
+    background: dodgerblue;
+    text-decoration: None;
+    padding: 5px;
+    color: black;
+    font-family: '黑体';
+}
+
+.submit:hover{
+    background: white;
+    border: black solid 1px;
+}

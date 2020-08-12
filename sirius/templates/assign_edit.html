@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>作业编辑</title>
+</head>
+<body>
+<h1>作业编辑</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <ul>
+        <li>
+            <span>标题</span>
+            <input type="text" name="title">
+        </li>
+        <li>
+            <span>科目</span>
+            <input type="text" name="type">
+        </li>
+        <li>
+            <span>作业文件</span>
+            <input type="file" name="content">
+        </li>
+    </ul>
+    <input type="submit" name="Submit" value="提交">
+    <a href="{% url 'assign' id 1 %}">放弃更改</a>
+</form>
+</body>
+</html>

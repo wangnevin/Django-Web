@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>作业批改</title>
+</head>
+<body>
+<h1>作业批改</h1>
+<p>教师姓名：{{ teacher.name }}</p>
+<div class="unreviewed-list">
+    <h2>待批改</h2>
+    <p>共有{{ unreviewed_list|length }}条待批改作业</p>
+    <div class="assign-list">
+        <table>
+            <tr><td>标 题</td><td>科 目</td><td>提交用户</td><td>作业文件</td><td>更新时间</td><td>批改</td><td>得分</td><td>获得学分</td></tr>
+            {% for list in pageInfo_1.object_list %}
+                <tr>
+                    <td>{{ list.title }}</td><td>{{ list.type }}</td><td>{{ list.user }}</td>
+                    <td>{{ list.content }}</td><td>{{ list.updated }}</td><td>{{ list.is_reviewed }}</td>
+                    <td>{{ list.score }}</td><td>{{ list.credit }}</td><td><a href="{% url 'assign_review' list.id %}">批改</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+        {% if pageInfo_1.has_previous %}
+            <a href="{% url 'review' id pageInfo_1.previous_page_number page2 %}">上一页</a>
+        {% endif %}
+        {% for page in pageInfo_1.paginator.page_range %}
+            <a href="{% url 'review' id page page2 %}">{{ page }}</a>
+        {% endfor %}
+        {% if pageInfo_1.has_next %}
+            <a href="{% url 'review' id pageInfo_1.next_page_number page2 %}">下一页</a>
+        {% endif %}
+    </div>
+</div>
+<div class="reviewed-list">
+    <h2>已批改</h2>
+    <p>共有{{ reviewed_list|length }}条已批改作业</p>
+    <div class="assign-list">
+        <table>
+            <tr><td>标 题</td><td>科 目</td><td>提交用户</td><td>作业文件</td><td>更新时间</td><td>批改</td><td>得分</td><td>获得学分</td></tr>
+            {% for list in pageInfo_2.object_list %}
+                <tr>
+                    <td>{{ list.title }}</td><td>{{ list.type }}</td><td>{{ list.user }}</td>
+                    <td>{{ list.content }}</td><td>{{ list.updated }}</td><td>{{ list.is_reviewed }}</td>
+                    <td>{{ list.score }}</td><td>{{ list.credit }}</td><td><a href="{% url 'assign_review' list.id %}">重新批改</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+        {% if pageInfo_2.has_previous %}
+            <a href="{% url 'review' id page1 pageInfo_2.previous_page_number %}">上一页</a>
+        {% endif %}
+        {% for page in pageInfo_2.paginator.page_range %}
+            <a href="{% url 'review' id page1 page %}">{{ page }}</a>
+        {% endfor %}
+        {% if pageInfo.has_next %}
+            <a href="{% url 'review' id page1 pageInfo_2.next_page_number %}">下一页</a>
+        {% endif %}
+    </div>
+</div>
+</body>
+</html>

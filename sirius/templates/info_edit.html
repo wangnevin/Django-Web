@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>信息编辑</title>
+</head>
+<body>
+    <h1>信息编辑</h1>
+    <form method="post">
+        {% csrf_token %}
+        <ul>
+            <li><span>姓名：</span><input type="text" name="name" value="暂无"></li>
+            <li><span>班级：</span><input type="text" name="class_number" value="暂无"></li>
+            <li><span>年级：</span><input type="text" name="grade" value="暂无"></li>
+            <li><span>电话：</span><input type="text" name="telephone" value="暂无"></li>
+            <li><span>住址：</span><input type="text" name="address" value="暂无"></li>
+            <li><span>微信：</span><input type="text" name="wx" value="暂无"></li>
+            <li><span>QQ：</span><input type="text" name="qq" value="暂无"></li>
+            <li><span>微博：</span><input type="text" name="wb" value="暂无"></li>
+        </ul>
+        <input type="submit" name="Submit" value="提交">
+        <a href="{% url 'assign' id 1 %}">放弃修改</a>
+    </form>
+</body>
+</html>

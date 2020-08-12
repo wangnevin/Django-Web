@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static "CSS/index.css" %}" />
+    <title>{{ user.name }}</title>
+</head>
+<body>
+<div class="info">
+{#    {% if user.photo.url %}#}
+{#        <img src="{{ user.photo.url }}" alt="暂无图片">#}
+{#    {% endif %}#}
+
+    <table class="student-info">
+        <tr>
+            <td><label>姓名</label></td><td>{{ user.name }}</td><td><label>住址</label></td><td>{{ user.address }}</td>
+        </tr>
+        <tr>
+            <td><label>年级</label></td><td>{{ user.grade }}</td><td><label>微信</label></td><td>{{ user.wx }}</td>
+        </tr>
+        <tr>
+            <td><label>班级</label></td><td>{{ user.class_number }}</td><td><label>QQ</label></td><td>{{ user.qq }}</td>
+        </tr>
+        <tr>
+            <td><label>电话</label></td><td>{{ user.telephone }}</td><td><label>微博</label></td><td>{{ user.wb }}</td>
+        </tr>
+    </table>
+    <a href="{% url 'info_edit' %}" class="submit">修改</a>
+</div>
+<div class="assignment">
+    <p>共有{{ assignment|length }}条作业记录</p>
+    <div class="assign-list">
+        <table>
+            <tr><td>标 题</td><td>科 目</td><td>提交用户</td><td>作业文件</td><td>更新时间</td><td>批改</td><td>得分</td><td>获得学分</td></tr>
+            {% for list in pageInfo.object_list %}
+                <tr>
+                    <td>{{ list.title }}</td><td>{{ list.type }}</td><td>{{ list.user }}</td>
+                    <td>{{ list.content }}</td><td>{{ list.updated }}</td><td>{{ list.is_reviewed }}</td>
+                    <td>{{ list.score }}</td><td>{{ list.credit }}</td><td><a href="{% url 'assign_edit' list.id %}" class="submit">编辑</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+        {% if pageInfo.has_previous %}
+            <a href="{% url 'assign' id pageInfo.previous_page_number %}" class="page">上一页</a>
+        {% endif %}
+        {% for page in pageInfo.paginator.page_range %}
+            <a href="{% url 'assign' id page %}" class="page">{{ page }}</a>
+        {% endfor %}
+        {% if pageInfo.has_next %}
+            <a href="{% url 'assign' id pageInfo.next_page_number %}" class="page">下一页</a>
+        {% endif %}
+    </div>
+    <a href="{% url 'assign_submit' %}" class="submit">提交作业</a>
+</div>
+<div class="credit"></div>
+</body>
+</html>
